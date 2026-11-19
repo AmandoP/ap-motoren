@@ -1,0 +1,607 @@
+{
+  "_info": "Konfigurator Motoren & Stromversorgung. Alle Werte mit 'check' sind Platzhalter oder Annahmen und müssen fachlich geprüft werden.",
+  "camera": {
+    "pos": [
+      0,
+      27,
+      28
+    ],
+    "target": [
+      0,
+      0,
+      4.2
+    ]
+  },
+  "board": {
+    "consumption": 60,
+    "vccMax": 200,
+    "driverTotal": 1000,
+    "driverPerMotor": 500,
+    "maxServosPwm": 3,
+    "servoSignalPins": [
+      "P1",
+      "P2",
+      "P0"
+    ],
+    "anchors": {
+      "_check": "Pinleiste 2×15, Raster 2,54 mm. Obere Reihe = zur Platinenmitte. Nach Skizze: links VCC/GND, rechts M1+/M1-/GND (oben) und M0+/M0-/VM+ (unten).",
+      "VM": [
+        1.771,
+        0.55,
+        1.98
+      ],
+      "GND_header": [
+        1.771,
+        0.55,
+        1.725
+      ],
+      "M0+": [
+        1.263,
+        0.55,
+        1.98
+      ],
+      "M0-": [
+        1.517,
+        0.55,
+        1.98
+      ],
+      "M1+": [
+        1.263,
+        0.55,
+        1.725
+      ],
+      "M1-": [
+        1.517,
+        0.55,
+        1.725
+      ],
+      "USB": [
+        -0.04,
+        0.24,
+        -2.6
+      ],
+      "VCC_header": [
+        -1.785,
+        0.55,
+        1.725
+      ],
+      "GND_left": [
+        -1.785,
+        0.55,
+        1.98
+      ]
+    },
+    "jst": {
+      "_info": "JST-PH-Buchse (S2B-PH-SM4), seitlicher Einstieg: Mitte, Steckrichtung nach außen, Tiefe, Einstecktiefe",
+      "center": [
+        2.457,
+        0.449,
+        0.996
+      ],
+      "dir": [
+        0.788,
+        0,
+        0.616
+      ],
+      "depth": 0.76,
+      "insert": 0.3
+    },
+    "adapter": {
+      "_check": "Adapter steckt auf den beiden linken Spalten der Pinleiste: rot = VCC, schwarz = GND (Spalte 1), Signal(e) in Spalte 2.",
+      "pos": [
+        -1.658,
+        0.05,
+        1.8525
+      ]
+    },
+    "flipLift": 0.95
+  },
+  "motors": {
+    "servo": {
+      "label": "Servo SG90",
+      "max": 4,
+      "voltage": "4,8–6 V",
+      "typ": 200,
+      "peak": 650
+    },
+    "dc": {
+      "label": "DC-Getriebemotor",
+      "max": 2,
+      "voltage": "3–6 V",
+      "typ": 150,
+      "peak": 800
+    }
+  },
+  "supplies": [
+    {
+      "id": "usb",
+      "label": "USB-C",
+      "sub": "5 V vom Computer oder Netzteil",
+      "volt": 5,
+      "limit": 500,
+      "limitLabel": "USB-2.0-Port, typisch",
+      "servo": "vcc",
+      "dc": "driver"
+    },
+    {
+      "id": "usbpack",
+      "label": "Batteriefach 3×AAA (USB)",
+      "sub": "ca. 4,5 V über den USB-C-Anschluss",
+      "volt": 4.5,
+      "cells": 3,
+      "servo": "vcc",
+      "dc": "driver"
+    },
+    {
+      "id": "vm",
+      "label": "Pinleiste VM (bis 9 V)",
+      "sub": "9-V-Block per Jumperkabel an VM/GND",
+      "volt": 9,
+      "servo": "battery",
+      "dc": "driver"
+    },
+    {
+      "id": "servoboard",
+      "label": "Calliope mini Servoboard",
+      "sub": "4×AAA, ab 3 Servos nötig",
+      "volt": 6,
+      "servo": "servoboard",
+      "dc": "servoboard"
+    }
+  ],
+  "texts": {
+    "vcc_one": "Ein SG90 am 3V-Pad läuft, aber schwach: Er ist für 4,8–6 V gebaut, und beim Bewegen braucht er schon allein etwa die 200 mA, die der Calliope mini extern liefern kann.",
+    "vcc_many": "Mehrere Servos überlasten den 3V-Ausgang (max. 200 mA). Der Calliope mini kann neu starten. Servos besser extern versorgen.",
+    "pwm_limit": "Mehr als 3 Servos gleichzeitig kann der Calliope mini nicht sauber ansteuern. Bewegungen werden ruckelig.",
+    "dc_peak": "Beim Anlaufen oder Blockieren zieht ein Getriebemotor bis ca. 800 mA. Der eingebaute Treiber schafft 0,5 A pro Motor.",
+    "dc_supply_check": "Welche Spannung der Motortreiber bei USB- bzw. Batteriebetrieb bekommt, bitte prüfen (Platzhalter).",
+    "usb_limit": "Zusammen mehr als ca. 500 mA: Ein USB-2.0-Port am Computer kann abschalten. Ein USB-Netzteil liefert meist mehr.",
+    "vm_servo": "SG90 vertragen max. ca. 6 V. Am 9-V-Block brauchen Servos einen eigenen 5–6-V-Anschluss oder Spannungsregler.",
+    "vm_ok": "Über VM versorgt der Akku den Calliope mini und den Motortreiber gemeinsam (max. 9 V).",
+    "sb_limit": "Das Servoboard betreibt max. 4 Aktoren gleichzeitig.",
+    "sb_ok": "Das Batteriefach versorgt Servoboard und Calliope mini. Laufen Servos zu langsam, Schiebeschalter von VCC auf VM stellen.",
+    "ok": "Diese Kombination passt.",
+    "adapter_pins": "Welche Pins der Pinleiste das Adapterkabel als Signal nutzt, bitte prüfen (Platzhalter).",
+    "usbpack": "Das Batteriefach versorgt den Calliope mini über USB-C mit ca. 4,5 V, wie ein USB-Netzteil.",
+    "sb_auto": "Ab 3 Servos ist das Servoboard nötig – es wurde automatisch gewählt.",
+    "pack_limit": "Das Batteriefach 3×AAA reicht nicht für 2 Servos und 2 DC-Motoren gleichzeitig – dafür das Servoboard nehmen."
+  },
+  "models": {
+    "sg90": "models/sg90.glb",
+    "tt": "models/tt.glb",
+    "phr2": "models/phr2.glb",
+    "usb": "models/usb.glb",
+    "clip": "models/clip.glb",
+    "adapter1": "models/adapter1.glb",
+    "adapter2": "models/adapter2.glb",
+    "servoboard": "models/servoboard.glb",
+    "bh3": "models/bh3.glb",
+    "bh4": "models/bh4.glb",
+    "bh3plug": "models/bh3plug.glb"
+  },
+  "layout": {
+    "_info": "Positionen (x rechts, y hoch, z nach vorne/unten im Bild) und Drehung in Grad. Batteriefächer liegen parallel zu den Motoren (Längsseite in x); rot -90 = Kabelende zeigt nach links, 90 = nach rechts.",
+    "jstPack": {
+      "pos": [
+        7.4,
+        0,
+        3.8
+      ],
+      "rot": -90
+    },
+    "nineVolt": {
+      "pos": [
+        7.8,
+        0,
+        -5.4
+      ],
+      "rot": -90
+    },
+    "extPack": {
+      "pos": [
+        -9.0,
+        0,
+        -6.4
+      ],
+      "rot": 90
+    },
+    "sbPack": {
+      "pos": [
+        -6.0,
+        0,
+        6.2
+      ],
+      "rot": 90
+    },
+    "dc": [
+      [
+        -8.2,
+        0,
+        10.2
+      ],
+      [
+        8.2,
+        0,
+        7.96
+      ]
+    ],
+    "servoSide": {
+      "x": -9.0,
+      "z": 3.8,
+      "gap": 3.2,
+      "_info": "Position bei 1–2 Servos (links neben dem Calliope mini)"
+    },
+    "_dc": "Rechter Motor ist um 180° gedreht, daher z um die Gehäusetiefe (2,24) versetzt, damit beide auf gleicher Höhe stehen."
+  },
+  "clipScale": 0.5,
+  "routing": {
+    "_info": "Spuren der Servo-Adern bei 1–2 Servos links: senkrechte Spur x, waagrechte Spur z (oberhalb des Boards)",
+    "height": 0.45,
+    "laneX": [
+      {
+        "vcc": -7.45,
+        "gnd": -7.25,
+        "sig": -7.05
+      },
+      {
+        "vcc": -6.85,
+        "gnd": -6.65,
+        "sig": -6.45
+      }
+    ],
+    "laneZ": [
+      {
+        "gnd": -5.65,
+        "vcc": -6.05
+      },
+      {
+        "gnd": -5.45,
+        "vcc": -5.85
+      }
+    ]
+  },
+  "servoboard": {
+    "_info": "Servoboard wird von hinten in die Pinleiste gesteckt: Calliope mini liegt umgedreht (um z gedreht, Rückseite oben). Koordinaten im Servoboard-Modell (cm). Reihenfolge je Servo: GND, Plus, Signal.",
+    "offset": [
+      0.007,
+      1.5,
+      0.4225
+    ],
+    "pinY": -0.125,
+    "plugIn": 2.3,
+    "plugLen": 1.5,
+    "servos": [
+      {
+        "name": "C8",
+        "side": -1,
+        "z": [
+          -0.605,
+          -0.351,
+          -0.097
+        ]
+      },
+      {
+        "name": "C9",
+        "side": -1,
+        "z": [
+          0.335,
+          0.589,
+          0.843
+        ]
+      },
+      {
+        "name": "C14",
+        "side": 1,
+        "z": [
+          -0.605,
+          -0.351,
+          -0.097
+        ]
+      },
+      {
+        "name": "C15",
+        "side": 1,
+        "z": [
+          0.335,
+          0.589,
+          0.843
+        ]
+      }
+    ],
+    "servoPos": [
+      [
+        7.0,
+        2.2
+      ],
+      [
+        7.0,
+        -1.0
+      ],
+      [
+        -7.0,
+        2.2
+      ],
+      [
+        -7.0,
+        -1.0
+      ]
+    ],
+    "terminals": [
+      [
+        -1.75,
+        -1.4
+      ],
+      [
+        -1.05,
+        -0.7
+      ]
+    ],
+    "termY": 0.4,
+    "termZ": 2.262,
+    "jack": [
+      1.975,
+      0.67,
+      1.604
+    ],
+    "jackPlug": 1.2,
+    "rotY": 180,
+    "dcPos": [
+      [
+        -8.4,
+        0,
+        -5.6
+      ],
+      [
+        8.4,
+        0,
+        -7.84
+      ]
+    ]
+  },
+  "layout2": {
+    "_info": "Positionen in cm (x rechts, z nach unten im Bild), Calliope-Mitte = 0,0. 'front' = Calliope Vorderseite oben (1–2 Servos), 'back' = Servoboard (umgedreht).",
+    "usbPlug": {
+      "len": 1.3,
+      "inset": 0.15,
+      "y": 0.32
+    },
+    "front": {
+      "camera": {
+        "pos": [
+          2.6,
+          27.0,
+          25.0
+        ],
+        "target": [
+          2.6,
+          0,
+          0.6
+        ]
+      },
+      "pack": {
+        "pos": [
+          7.6,
+          -5.1
+        ],
+        "rot": -90
+      },
+      "nineVolt": {
+        "pos": [
+          7.6,
+          -5.4
+        ],
+        "rot": -90
+      },
+      "servoZ": 8.8,
+      "servoX": {
+        "std": [
+          -1.66,
+          1.9
+        ],
+        "dc": [
+          -1.66,
+          -5.3
+        ]
+      },
+      "coupler": {
+        "z": 5.4,
+        "len": 1.6
+      },
+      "dc": {
+        "one": [
+          {
+            "pos": [
+              8.8,
+              5.8
+            ],
+            "ch": 0
+          }
+        ],
+        "two": [
+          {
+            "pos": [
+              8.8,
+              0.0
+            ],
+            "ch": 1
+          },
+          {
+            "pos": [
+              8.8,
+              5.8
+            ],
+            "ch": 0
+          }
+        ]
+      }
+    },
+    "back": {
+      "camera": {
+        "pos": [
+          0.0,
+          27.5,
+          27.5
+        ],
+        "target": [
+          0.0,
+          0,
+          0.4
+        ]
+      },
+      "pack": {
+        "pos": [
+          -9.0,
+          -5.2
+        ],
+        "rot": 0
+      },
+      "servoOrder": [
+        "C15",
+        "C14",
+        "C9",
+        "C8"
+      ],
+      "servos": {
+        "std": {
+          "C15": [
+            -9.2,
+            -0.25
+          ],
+          "C14": [
+            -9.2,
+            3.6
+          ],
+          "C9": [
+            9.2,
+            -0.25
+          ],
+          "C8": [
+            9.2,
+            3.6
+          ]
+        },
+        "dc2": {
+          "C15": [
+            -9.2,
+            -0.25
+          ],
+          "C14": [
+            -9.2,
+            3.6
+          ],
+          "C9": [
+            9.2,
+            4.4
+          ],
+          "C8": [
+            9.2,
+            8.3
+          ]
+        }
+      },
+      "dc": {
+        "one": [
+          {
+            "pos": [
+              9.0,
+              -7.2
+            ],
+            "ch": 0
+          }
+        ],
+        "two": [
+          {
+            "pos": [
+              9.0,
+              -7.2
+            ],
+            "ch": 1
+          },
+          {
+            "pos": [
+              9.0,
+              -1.97
+            ],
+            "ch": 0
+          }
+        ]
+      }
+    },
+    "usbPack": {
+      "_info": "Fach liegt rechts oben, Zellen waagrecht; Kabel als Halbbogen vom Stecker zur Oberkante des Fachs.",
+      "portZ": -2.46,
+      "plugY": 0.27,
+      "plugLen": 2.93,
+      "pack": [
+        5.6,
+        -4.9
+      ],
+      "rot": 90,
+      "exit": [
+        1.66,
+        0.46,
+        0
+      ],
+      "arc": 1.4
+    },
+    "pack4": {
+      "_info": "4×AAA-Modell: Mitte z, Kabelaustritt (lokal)",
+      "centerZ": 2.43,
+      "exit": [
+        2.95,
+        0.62,
+        -0.69
+      ]
+    }
+  },
+  "prog": {
+    "_check": "Servo-Blöcke aus der MakeCode-Erweiterung 'servo' (servos.P0.setAngle). Pins für Adapterkabel (P0/P1) und Servoboard (C8–C15) sowie den Motor-Block bitte prüfen.",
+    "adapterPins": [
+      "P0",
+      "P1"
+    ],
+    "colors": {
+      "basic": "#1e90ff",
+      "pins": "#b22222",
+      "motors": "#00a4a6",
+      "servos": "#d65cd6"
+    },
+    "shareLinks": {
+      "_info": "Geteilte MakeCode-Projekte je Kombination, Schlüssel z. B. '1s0d', '2s1d', '3s2d-sb'. Wert: Link aus MakeCode → Teilen (https://makecode.calliope.cc/_XXXX).",
+      "1s0d": "https://makecode.calliope.cc/_1ua1gfg607wk"
+    }
+  },
+  "info": {
+    "servo": {
+      "scale": 2.6,
+      "cam": [
+        9,
+        7,
+        11
+      ],
+      "html": "<h3>Servomotor (SG90)</h3>\n<p>Ein Servo ist ein kleiner Motor mit Getriebe und eingebauter Elektronik. Er wird über ein Pulssignal gesteuert – je nach Bauart auf zwei Arten:</p>\n<h4>Positionsgesteuert (180°)</h4>\n<p>Der Arm fährt auf einen <b>Winkel</b> zwischen 0° und 180° und hält ihn dort. Ein Potentiometer im Gehäuse misst die Stellung, die Elektronik regelt nach – ein geschlossener Regelkreis. Typisch für Greifer, Klappen oder Zeiger.</p>\n<h4>Kontinuierlich (360°)</h4>\n<p>Der Servo dreht sich <b>dauerhaft</b>. Das Signal bestimmt nicht den Winkel, sondern Richtung und Geschwindigkeit; 90° bzw. die Mitte bedeutet Stillstand. Eine Position kann er nicht halten. Typisch für Räder kleiner Fahrzeuge.</p>\n<dl class=\"facts\"><dt>Spannung</dt><dd>4,8–6 V</dd><dt>Strom</dt><dd>ca. 200 mA, Anlauf bis ca. 650 mA</dd><dt>Steuersignal</dt><dd>PWM, 50 Hz (20 ms), Impuls 1–2 ms</dd><dt>Kabel</dt><dd>braun = GND, rot = Plus, orange = Signal</dd></dl>",
+      "cable": 3.2
+    },
+    "dc": {
+      "scale": 1.7,
+      "cam": [
+        9,
+        8.5,
+        12
+      ],
+      "html": "<h3>DC-Getriebemotor</h3>\n<p>Ein Gleichstrommotor dreht, sobald Strom fließt. Das Getriebe macht ihn langsamer und kräftiger – ideal für Räder. Die Geschwindigkeit wird über PWM eingestellt, die Richtung über die Polung. Ohne Sensor weiß der Calliope mini nicht, wie schnell er wirklich dreht (offener Regelkreis).</p>\n<dl class=\"facts\"><dt>Spannung</dt><dd>3–6 V</dd><dt>Strom</dt><dd>ca. 150 mA, Anlauf/Blockieren bis ca. 800 mA</dd><dt>Anschluss</dt><dd>zwei Kabel, + und −</dd></dl>"
+    }
+  },
+  "connText": {
+    "servo": {
+      "std": "Adapterkabel + Pinleiste",
+      "sb": "Servoboard (Servo-Pins C15, C14, C9, C8)",
+      "alt": "Krokodilklemmen, Jumperkabel"
+    },
+    "dc": {
+      "std": "Pinleiste (M0, M1)",
+      "sb": "Servoboard (Schraubklemmen M0, M1)",
+      "alt": null
+    }
+  }
+}
